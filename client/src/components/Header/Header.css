@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_image {
+  width: 50px;
+}
+
+.header_navigation-block {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.navigation-block_link {
+  font-size: 18px;
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  margin-left: 15px;
+  margin-right: 15px;
+  display: inline;
+}
+
+.navigation-block_link:hover {
+  color: gray;
+}
