@@ -62,8 +62,8 @@ app.get("/users/number", (req, res) => {
         "SELECT COUNT(social_network) FROM users WHERE social_network='facebook'",
         (err, facebookCount) => {
           res.send({
-            google: googleCount.rows[0].count,
-            facebook: facebookCount.rows[0].count,
+            google: googleCount?.rows[0].count,
+            facebook: facebookCount?.rows[0].count,
           });
         }
       );
