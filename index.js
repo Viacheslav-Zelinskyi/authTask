@@ -26,6 +26,10 @@ app.get('/userPage', function(req, res) {
   res.sendFile('index.html', {root: path.join(__dirname, '/client/build/')});
 });
 
+app.get('/loginPage', function(req, res) {
+  res.sendFile('index.html', {root: path.join(__dirname, '/client/build/')});
+});
+
 app.post("/auth/google", jsonParser, (req, res) => {
   const social_id = req.body.social_id;
   const name = req.body.name;
