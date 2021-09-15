@@ -20,14 +20,14 @@ const dateString =
   "." +
   dateObj.getFullYear();
 
-app.use('/', express.static(path.join(__dirname, "client/build")));
+app.use("/", express.static(path.join(__dirname, "client/build")));
 
-app.get('/userPage', function(req, res) {
-  res.sendFile('index.html', {root: path.join(__dirname, '/client/build/')});
+app.get("/userPage", function (req, res) {
+  res.sendFile("index.html", { root: path.join(__dirname, "/client/build/") });
 });
 
-app.get('/loginPage', function(req, res) {
-  res.sendFile('index.html', {root: path.join(__dirname, '/client/build/')});
+app.get("/loginPage", function (req, res) {
+  res.sendFile("index.html", { root: path.join(__dirname, "/client/build/") });
 });
 
 app.post("/auth/google", jsonParser, (req, res) => {
@@ -103,27 +103,21 @@ app.delete("/users", jsonParser, (req, res) => {
       facebookAuth(req.body.token)
         .then((authData) =>
           req.body.social_id.map((item) =>
-            db.query(
-              "DELETE FROM users WHERE social_id=$1",
-              [item],
-              (err, result) => res.send(result.rows)
-            )
+            db.query("DELETE FROM users WHERE social_id=$1", [item])
           )
         )
         .catch((err) => res.send("Auth error" + err));
+      res.send("Deleted");
       break;
     case "google":
       googleAuth(req.body.token)
         .then((authData) =>
           req.body.social_id.map((item) =>
-            db.query(
-              "DELETE FROM users WHERE social_id=$1",
-              [item],
-              (err, result) => res.send(result.rows)
-            )
+            db.query("DELETE FROM users WHERE social_id=$1", [item])
           )
         )
         .catch((err) => res.send("Auth error" + err));
+      res.send("Deleted");
       break;
   }
 });
@@ -134,27 +128,25 @@ app.patch("/users/block", jsonParser, (req, res) => {
       facebookAuth(req.body.token)
         .then((authData) =>
           req.body.social_id.map((item) =>
-            db.query(
-              "UPDATE users SET status='blocked' WHERE social_id=$1",
-              [item],
-              (err, result) => res.send(result.rows)
-            )
+            db.query("UPDATE users SET status='blocked' WHERE social_id=$1", [
+              item,
+            ])
           )
         )
         .catch((err) => res.send("Auth error" + err));
+      res.send("Blocked");
       break;
     case "google":
       googleAuth(req.body.token)
         .then((authData) =>
           req.body.social_id.map((item) =>
-            db.query(
-              "UPDATE users SET status='blocked' WHERE social_id=$1",
-              [item],
-              (err, result) => res.send(result.rows)
-            )
+            db.query("UPDATE users SET status='blocked' WHERE social_id=$1", [
+              item,
+            ])
           )
         )
         .catch((err) => res.send("Auth error" + err));
+      res.send("Blocked");
       break;
     default:
       return res.send("Error");
@@ -168,27 +160,25 @@ app.patch("/users/unblock", jsonParser, (req, res) => {
       facebookAuth(req.body.token)
         .then((authData) =>
           req.body.social_id.map((item) =>
-            db.query(
-              "UPDATE users SET status='active' WHERE social_id=$1",
-              [item],
-              (err, result) => res.send(result.rows)
-            )
+            db.query("UPDATE users SET status='active' WHERE social_id=$1", [
+              item,
+            ])
           )
         )
         .catch((err) => res.send("Auth error" + err));
+      res.send("Unblocked");
       break;
     case "google":
       googleAuth(req.body.token)
         .then((authData) =>
           req.body.social_id.map((item) =>
-            db.query(
-              "UPDATE users SET status='active' WHERE social_id=$1",
-              [item],
-              (err, result) => res.send(result.rows)
-            )
+            db.query("UPDATE users SET status='active' WHERE social_id=$1", [
+              item,
+            ])
           )
         )
         .catch((err) => res.send("Auth error" + err));
+      res.send("Unblocked");
       break;
     default:
       return res.send("Error");
